@@ -1,11 +1,12 @@
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import { NavLink } from "react-router-dom";
 
 function ErrorPage() {
   return (
     <div>
       <Navbar />
-      <div className="teams container min-h-[800px] flex justify-center items-center px-2 md:px-7  ">
+      <div className="  bg-blue-500 bg-gradient-to-r from-blue-500  to-white       min-h-[100vh] flex justify-center items-center px-2 md:px-7  ">
         <div class="text-center">
           <h1 class="mb-4 text-6xl font-semibold text-orange-600">404</h1>
           <p class="mb-4 text-lg text-gray-600">Oops! Looks like you're lost.</p>
@@ -16,9 +17,9 @@ function ErrorPage() {
           </div>
           <p class="mt-4 text-gray-600">
             Let's get you back{" "}
-            <a href="/" class="text-emerald-500">
+            <NavLink to="/" className="text-orange-600 font-bold">
               home
-            </a>
+            </NavLink>
             .
           </p>
         </div>
