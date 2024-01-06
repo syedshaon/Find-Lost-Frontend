@@ -26,7 +26,7 @@ const ImageWithClickCoordinates = ({ togglePopup, imgSrc }) => {
     const updateScaleFactor = () => {
       // Set the scaling factor based on the screen width
       const screenWidth = window.innerWidth;
-      const maxScreenWidth = 2150; // Adjust the maximum width as needed
+      const maxScreenWidth = 2120; // Adjust the maximum width as needed
       const minScaleFactor = 0.1; // Minimum scale factor
       const maxScaleFactor = 1; // Maximum scale factor
 
@@ -36,7 +36,7 @@ const ImageWithClickCoordinates = ({ togglePopup, imgSrc }) => {
       setleftOffset((maxScreenWidth - screenWidth) / 2);
 
       setScaleFactor(newScaleFactor);
-      console.log(newScaleFactor);
+      //   console.log(newScaleFactor);
     };
 
     // Initial update

@@ -41,7 +41,8 @@ function GameOne() {
       <div className="bg-blue-300 relative   py-10  px-1   min-h-[100vh]">
         <Popup isOpen={isOpen} closePopup={closePopup} positionPop={positionPop} />
         {/* <img onClick={togglePopup} src={Abcd} alt="Abcd" className="w-full   object-cover rounded-md mb-4" /> */}
-        <ImageWithClickCoordinates togglePopup={togglePopup} imgSrc={Abcd} />
+        <img src={Abcd} alt="Number Game" onClick={togglePopup} />
+        {/* <ImageWithClickCoordinates togglePopup={togglePopup} imgSrc={Abcd} /> */}
       </div>
       <Footer />
     </>

@@ -3,7 +3,10 @@ import React, { useState } from "react";
 
 const Popup = ({ positionPop, isOpen, closePopup }) => {
   const screenWidth = window.innerWidth;
-  console.log(positionPop.x / screenWidth);
+  const screenHeight = window.innerHeight;
+
+  console.log(positionPop.y / screenHeight);
+
   return (
     <div>
       {/* Popup */}
@@ -11,10 +14,22 @@ const Popup = ({ positionPop, isOpen, closePopup }) => {
         <div
           className="fixed z-50"
           style={
-            positionPop.x * screenWidth > 0.75
+            positionPop.x / screenWidth > 0.6
+              ? positionPop.y / screenHeight > 0.7
+                ? {
+                    top: `${positionPop.y * 0.7}px`,
+
+                    left: `${positionPop.x * 0.6}px`,
+                  }
+                : {
+                    top: `${positionPop.y}px`,
+
+                    left: `${positionPop.x * 0.6}px`, // Adjust the offset as needed
+                  }
+              : positionPop.y / screenHeight > 0.7
               ? {
-                  top: `${positionPop.y}px`,
-                  left: `${positionPop.x * 0.75}px`, // Adjust the offset as needed
+                  top: `${positionPop.y * 0.7}px`,
+                  left: `${positionPop.x + 10}px`, // Adjust the offset as needed
                 }
               : {
                   top: `${positionPop.y}px`,
