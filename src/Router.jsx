@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
+import GameOne from "./pages/GameOne";
 import ErrorPage from "./pages/ErrorPage";
 
 // import Team from "./pages/Team";
@@ -19,6 +20,7 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/game-one" element={<GameOne />} />
         {/* <Route path="/team" element={<Team />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />

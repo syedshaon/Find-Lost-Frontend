@@ -28,6 +28,9 @@ const Navbar = () => {
         </NavLink>
 
         <nav className="lg:flex hidden items-center space-x-30">
+          <NavLink to="/game-one">
+            <Button text="Game One" color="emerald" />
+          </NavLink>
           <NavLink to="/language">
             <Button text="Language" color="emerald" />
           </NavLink>
@@ -52,6 +55,11 @@ const Navbar = () => {
         {isMenuOpen && (
           <nav className="lg:hidden fixed z-50 top-16 left-0 h-full w-full bg-blue-500 bg-gradient-to-b from-blue-300 to-blue-500 ">
             <ul className=" text-center p-4 flex flex-col items-center space-y-4">
+              <NavElmnt onClick={closeMenu}>
+                <NavLink to="/game-one">
+                  <Button text="Game One" color="emerald" />
+                </NavLink>
+              </NavElmnt>
               <NavElmnt onClick={closeMenu}>
                 <NavLink to="/language">
                   <Button text="Language" color="emerald" />

@@ -1,5 +1,7 @@
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import OneTwo from "../assets/1234.jpg";
+import Abcd from "../assets/ABCD.jpg";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -19,16 +21,18 @@ function Home() {
         {/* Image Section */}
         <section className="container mx-auto mt-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Image 2 */}
+            <NavLink to="/game-one">
+              <div className="bg-white p-4 rounded-lg shadow-md">
+                <img src={Abcd} alt="Abcd" className="w-full h-48 object-cover rounded-md mb-4" />
+                <p className="text-gray-700">Description for Image 2</p>
+              </div>
+            </NavLink>
+
             {/* Image 1 */}
             <div className="bg-white p-4 rounded-lg shadow-md">
-              <img src="https://via.placeholder.com/400" alt="Image 1" className="w-full h-48 object-cover rounded-md mb-4" />
+              <img src={OneTwo} alt="OneTwo" className="w-full h-48 object-cover rounded-md mb-4" />
               <p className="text-gray-700">Description for Image 1</p>
-            </div>
-
-            {/* Image 2 */}
-            <div className="bg-white p-4 rounded-lg shadow-md">
-              <img src="https://via.placeholder.com/400" alt="Image 2" className="w-full h-48 object-cover rounded-md mb-4" />
-              <p className="text-gray-700">Description for Image 2</p>
             </div>
 
             {/* Image 3 */}
