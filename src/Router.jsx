@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import GameOne from "./pages/GameOne";
+import GameTwo from "./pages/GameTwo";
+import GameThree from "./pages/GameThree";
 import ErrorPage from "./pages/ErrorPage";
 
 // import Team from "./pages/Team";
@@ -21,6 +23,8 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/game-one" element={<GameOne />} />
+        <Route path="/game-two" element={<GameTwo />} />
+        <Route path="/game-three" element={<GameThree />} />
         {/* <Route path="/team" element={<Team />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />

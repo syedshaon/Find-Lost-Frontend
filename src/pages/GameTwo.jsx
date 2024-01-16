@@ -2,15 +2,16 @@ import React, { useState, useEffect } from "react";
 
 import NavbarNew from "./NavbarNew";
 import Footer from "./Footer";
-import Abcd from "../assets/ABCD.jpg";
+import Animals from "../assets/animals.jpg";
 import Popup from "./Popup";
 
-function GameOne() {
+function GameTwo() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [positionPop, setPositionPop] = useState({ x: 0, y: 0 });
   const [isOpen, setIsOpen] = useState(false);
   const [confirmationText, setConfirmationText] = useState("");
   const [isVisible, setIsVisible] = useState(false);
+
   // const togglePopup = (event) => {
   //   setPosition({ x: event.clientX, y: event.clientY });
   //   setIsOpen(!isOpen);
@@ -19,7 +20,7 @@ function GameOne() {
   // let imgWidth;
   // let imgHeight;
   // let Q = [0, 525, 0, 357];
-  const uLetters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+  const uLetters = ["Cheetah", "Chicken", "Deer", "Zebra", "Horse", "Sloth", "Elephant", "Crocodile", "Hyena", "Rhino", "Ox", "Giraffe", "Ant", "Butterfly", "Snake", "Ostrich", "Fox", "Tortoise", "Snail", "Dog", "Sheep", "Panda", "Squirrel", "Cow", "Cat", "Camel", "Penguin", "Gorilla"];
 
   const [selectedLetters, setSelectedLetters] = useState([]);
   const [BoardItems, setBoardItems] = useState({});
@@ -63,40 +64,40 @@ function GameOne() {
   }, []);
 
   const AlphabetPostion = {
-    Q: [0, 525, 0, 357],
-    W: [526, 1050, 0, 357],
-    C: [1051, 1576, 0, 357],
-    T: [1577, 2102, 0, 357],
+    Cheetah: [0, 525, 0, 357],
+    Chicken: [526, 1050, 0, 357],
+    Deer: [1051, 1576, 0, 357],
+    Zebra: [1577, 2102, 0, 357],
 
-    S: [0, 525, 358, 715],
-    F: [526, 1050, 358, 715],
-    Y: [1051, 1576, 358, 715],
-    H: [1577, 2102, 358, 715],
+    Horse: [0, 525, 358, 715],
+    Sloth: [526, 1050, 358, 715],
+    Elephant: [1051, 1576, 358, 715],
+    Crocodile: [1577, 2102, 358, 715],
 
-    Z: [0, 525, 716, 1073],
-    U: [526, 1050, 716, 1073],
-    D: [1051, 1576, 716, 1073],
-    L: [1577, 2102, 716, 1073],
+    Hyena: [0, 525, 716, 1073],
+    Rhino: [526, 1050, 716, 1073],
+    Ox: [1051, 1576, 716, 1073],
+    Giraffe: [1577, 2102, 716, 1073],
 
-    O: [0, 525, 1074, 1431],
-    N: [526, 1050, 1074, 1431],
-    E: [1051, 1576, 1074, 1431],
-    P: [1577, 2102, 1074, 1431],
+    Ant: [0, 525, 1074, 1431],
+    Butterfly: [526, 1050, 1074, 1431],
+    Snake: [1051, 1576, 1074, 1431],
+    Ostrich: [1577, 2102, 1074, 1431],
 
-    I: [0, 525, 1432, 1789],
-    R: [526, 1050, 1432, 1789],
-    5: [1051, 1576, 1432, 1789],
-    9: [1577, 2102, 1432, 1789],
+    Fox: [0, 525, 1432, 1789],
+    Tortoise: [526, 1050, 1432, 1789],
+    Snail: [1051, 1576, 1432, 1789],
+    Dog: [1577, 2102, 1432, 1789],
 
-    M: [0, 525, 1790, 2147],
-    V: [526, 1050, 1790, 2147],
-    A: [1051, 1576, 1790, 2147],
-    X: [1577, 2102, 1790, 2147],
+    Sheep: [0, 525, 1790, 2147],
+    Panda: [526, 1050, 1790, 2147],
+    Squirrel: [1051, 1576, 1790, 2147],
+    Cow: [1577, 2102, 1790, 2147],
 
-    J: [0, 525, 2148, 2500],
-    B: [526, 1050, 2148, 2500],
-    K: [1051, 1576, 2148, 2500],
-    G: [1577, 2102, 2148, 2500],
+    Cat: [0, 525, 2148, 2500],
+    Camel: [526, 1050, 2148, 2500],
+    Penguin: [1051, 1576, 2148, 2500],
+    Gorilla: [1577, 2102, 2148, 2500],
   };
   // const [Qposition, setQPosition] = useState(0);
   // const [Wposition, setWPosition] = useState(0);
@@ -232,9 +233,10 @@ function GameOne() {
       <div className="bg-blue-300 relative mt-[84px]  py-[10px]   min-h-[100vh]">
         <Popup comparePosition={comparePosition} isOpen={isOpen} closePopup={closePopup} positionPop={positionPop} selectedLetters={selectedLetters} />
         {/* <img onClick={togglePopup} src={Abcd} alt="Abcd" className="w-full   object-cover rounded-md mb-4" /> */}
+
         <img
           className="w-full"
-          src={Abcd}
+          src={Animals}
           alt="Number Game"
           onClick={(e) => {
             togglePopup(e);
@@ -256,4 +258,4 @@ function GameOne() {
   );
 }
 
-export default GameOne;
+export default GameTwo;

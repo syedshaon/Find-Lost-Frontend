@@ -1,6 +1,7 @@
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { NavLink } from "react-router-dom";
+import Stopwatch from "./StopWatch";
 
 function ErrorPage() {
   return (
