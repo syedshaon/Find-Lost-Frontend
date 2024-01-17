@@ -11,7 +11,7 @@ const Button = ({ text, color, hoverBG }) => {
 const NavElmnt = ({ children }) => <li className="cursor-pointer hover:underline  transition-all  underline-offset-4 decoration-blue-500 p-2.5 min-w-[123px] px-4 space-x-2.5 text-black text-base font-medium ">{children}</li>;
 
 const NavbarNew = ({ timer, BoardItems }) => {
-  console.log(BoardItems);
+  // console.log(BoardItems);
   const [isMenuOpen, setMenuOpen] = useState(false);
 
   const closeMenu = () => {
@@ -26,6 +26,7 @@ const NavbarNew = ({ timer, BoardItems }) => {
             <span className="text-black text-xl font-bold ">Find</span>
             <span className="text-blue-500 text-xl font-bold ">Us!</span>
           </h1>
+          <small className="text-sm">As Fast As You Can!</small>
         </NavLink>
 
         <nav className="flex flex-wrap justify-center    items-center space-x-30">

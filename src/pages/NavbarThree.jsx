@@ -28,6 +28,7 @@ const NavbarThree = ({ timer, BoardItems }) => {
             <span className="text-black text-xl font-bold ">Find</span>
             <span className="text-blue-500 text-xl font-bold ">Us!</span>
           </h1>
+          <small className="text-sm">As Fast As You Can!</small>
         </NavLink>
 
         <nav className="flex flex-wrap justify-center    items-center space-x-30">

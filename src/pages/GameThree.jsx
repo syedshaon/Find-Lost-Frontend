@@ -1,31 +1,37 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import NavbarThree from "./NavbarThree";
 import Footer from "./Footer";
 import Waldo from "../assets/waldo.jpg";
 import PopupTwo from "./PopupTwo";
+import FinishPop from "./FinishPop";
 
 function GameThree() {
+  const navigate = useNavigate();
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [positionPop, setPositionPop] = useState({ x: 0, y: 0 });
   const [isOpen, setIsOpen] = useState(false);
   const [confirmationText, setConfirmationText] = useState("");
   const [isVisible, setIsVisible] = useState(false);
+  const [seconds, setSeconds] = useState(0);
+  const [isRunning, setIsRunning] = useState(true);
+  const [showFinishPopup, setShowFinishPopup] = useState(false);
 
   const selectedLetters = ["Professor", "Police", "Sign"];
 
   const [BoardItems, setBoardItems] = useState({
     Professor: {
       isDone: false,
-      value: "M",
+      value: "Professor",
     },
     Police: {
       isDone: false,
-      value: "N",
+      value: "Police",
     },
     Sign: {
       isDone: false,
-      value: "B",
+      value: "Sign",
     },
   });
 
@@ -33,6 +39,11 @@ function GameThree() {
     Professor: [600, 705, 1840, 1980],
     Police: [1900, 1940, 1050, 1150],
     Sign: [0, 50, 2800, 2880],
+  };
+
+  const cancelformSubmit = () => {
+    setShowFinishPopup(false);
+    navigate("/");
   };
 
   const togglePopup = (event) => {
@@ -44,7 +55,7 @@ function GameThree() {
     const x = event.nativeEvent.offsetX;
     const y = event.nativeEvent.offsetY;
 
-    console.log(`Mouse clicked at coordinates: (${x}, ${y})`);
+    // console.log(`Mouse clicked at coordinates: (${x}, ${y})`);
   };
 
   const comparePosition = (letter) => {
@@ -69,29 +80,46 @@ function GameThree() {
       setTimeout(() => {
         setIsVisible(false);
       }, 2000);
-      console.log(position.x, X1, X2, position.y, Y1, Y2);
+      // console.log(position.x, X1, X2, position.y, Y1, Y2);
+      // if (1 == 1) {
+      //   setIsRunning(false);
+      //   setShowFinishPopup(true);
+      //   console.log(BoardItems);
+      // }
     } else {
       setIsVisible(true);
       setConfirmationText("Oops! Please Try Again...");
       setTimeout(() => {
         setIsVisible(false);
       }, 2000);
-      console.log(position.x, X1, X2, position.y, Y1, Y2);
+      // console.log(position.x, X1, X2, position.y, Y1, Y2);
     }
   };
 
-  // Timer Area
-
-  const [seconds, setSeconds] = useState(0);
+  // Check if all finding is done
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setSeconds((prevSeconds) => prevSeconds + 1);
-    }, 1000);
+    if (BoardItems.Professor.isDone === true && BoardItems.Police.isDone === true && BoardItems.Sign.isDone === true) {
+      setIsRunning(false);
+      setShowFinishPopup(true);
+      // console.log(BoardItems);
+    }
+  }, [BoardItems]);
 
-    // Clean up the interval when the component unmounts
-    return () => clearInterval(intervalId);
-  }, []); // The empty dependency array ensures that the effect runs only once (on mount)
+  // End of all finding done
+
+  // Timer Area
+
+  useEffect(() => {
+    if (isRunning) {
+      const intervalId = setInterval(() => {
+        setSeconds((prevSeconds) => prevSeconds + 1);
+      }, 1000);
+
+      // Clean up the interval when the component unmounts
+      return () => clearInterval(intervalId);
+    }
+  }, [isRunning]); // The empty dependency array ensures that the effect runs only once (on mount)
 
   // Timer Area Ends
 
@@ -116,6 +144,8 @@ function GameThree() {
         />
       </div>
       <Footer />
+      {showFinishPopup && <FinishPop time={`${String(Math.trunc(seconds / 60)).padStart(2, "0")} minutes ${String(seconds % 60).padStart(2, "0")} seconds`} cancelformSubmit={cancelformSubmit} />}
+
       {isVisible ? <div className="fixed top-[120px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 border rounded shadow-md">{confirmationText}</div> : null}
     </>
   );

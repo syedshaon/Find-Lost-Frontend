@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from "react";
-
+import { useNavigate } from "react-router-dom";
 import NavbarNew from "./NavbarNew";
 import Footer from "./Footer";
 import Abcd from "../assets/ABCD.jpg";
 import Popup from "./Popup";
+import FinishPop from "./FinishPop";
 
 function GameOne() {
+  const navigate = useNavigate();
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [positionPop, setPositionPop] = useState({ x: 0, y: 0 });
   const [isOpen, setIsOpen] = useState(false);
   const [confirmationText, setConfirmationText] = useState("");
   const [isVisible, setIsVisible] = useState(false);
+  const [isRunning, setIsRunning] = useState(true);
+  const [showFinishPopup, setShowFinishPopup] = useState(false);
   // const togglePopup = (event) => {
   //   setPosition({ x: event.clientX, y: event.clientY });
   //   setIsOpen(!isOpen);
@@ -43,24 +47,24 @@ function GameOne() {
       return acc;
     }, {});
 
-    console.log(newItems);
+    // console.log(newItems);
     setBoardItems({ ...newItems });
   }, [selectedLetters]);
 
-  console.log(BoardItems);
-  console.log(selectedLetters);
+  // console.log(BoardItems);
+  // console.log(selectedLetters);
 
-  useEffect(() => {
-    const newItems = selectedLetters.reduce((acc, letter) => {
-      acc[letter] = {
-        isActive: false,
-        value: letter,
-      };
-      return acc;
-    }, {});
-    setBoardItems(newItems);
-    console.log(newItems);
-  }, []);
+  // useEffect(() => {
+  //   const newItems = selectedLetters.reduce((acc, letter) => {
+  //     acc[letter] = {
+  //       isActive: false,
+  //       value: letter,
+  //     };
+  //     return acc;
+  //   }, {});
+  //   setBoardItems(newItems);
+  //   console.log(newItems);
+  // }, []);
 
   const AlphabetPostion = {
     Q: [0, 525, 0, 357],
@@ -102,6 +106,11 @@ function GameOne() {
   // const [Wposition, setWPosition] = useState(0);
   // const [Cposition, setCPosition] = useState(0);
 
+  const cancelformSubmit = () => {
+    setShowFinishPopup(false);
+    navigate("/");
+  };
+
   const togglePopup = (event) => {
     // setPosition({ x: event.nativeEvent.clientX, y: event.nativeEvent.clientY });
     setPosition({ x: event.nativeEvent.offsetX, y: event.nativeEvent.offsetY });
@@ -117,7 +126,7 @@ function GameOne() {
     // const x = event.nativeEvent.clientX;
     // const y = event.nativeEvent.clientY;
 
-    console.log(`Mouse clicked at coordinates: (${x}, ${y})`);
+    // console.log(`Mouse clicked at coordinates: (${x}, ${y})`);
   };
 
   // useEffect(() => {
@@ -186,14 +195,14 @@ function GameOne() {
       setTimeout(() => {
         setIsVisible(false);
       }, 2000);
-      console.log(position.x, X1, X2, position.y, Y1, Y2);
+      // console.log(position.x, X1, X2, position.y, Y1, Y2);
     } else {
       setIsVisible(true);
       setConfirmationText("Oops! Please Try Again...");
       setTimeout(() => {
         setIsVisible(false);
       }, 2000);
-      console.log(position.x, X1, X2, position.y, Y1, Y2);
+      // console.log(position.x, X1, X2, position.y, Y1, Y2);
     }
   };
 
@@ -207,18 +216,34 @@ function GameOne() {
   //    }
   //  };
 
+  // Check if all finding is done
+
+  useEffect(() => {
+    if (Object.keys(BoardItems).length > 2) {
+      if (Object.values(BoardItems).every((item) => item.isDone === true)) {
+        setIsRunning(false);
+        setShowFinishPopup(true);
+        // console.log(BoardItems);
+      }
+    }
+  }, [BoardItems]);
+
+  // End of all finding done
+
   // Timer Area
 
   const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setSeconds((prevSeconds) => prevSeconds + 1);
-    }, 1000);
+    if (isRunning) {
+      const intervalId = setInterval(() => {
+        setSeconds((prevSeconds) => prevSeconds + 1);
+      }, 1000);
 
-    // Clean up the interval when the component unmounts
-    return () => clearInterval(intervalId);
-  }, []); // The empty dependency array ensures that the effect runs only once (on mount)
+      // Clean up the interval when the component unmounts
+      return () => clearInterval(intervalId);
+    }
+  }, [isRunning]); // The empty dependency array ensures that the effect runs only once (on mount)
 
   // Timer Area Ends
 
@@ -251,6 +276,7 @@ function GameOne() {
         {/* <ImageWithClickCoordinates togglePopup={togglePopup} imgSrc={Abcd} /> */}
       </div>
       <Footer />
+      {showFinishPopup && <FinishPop time={`${String(Math.trunc(seconds / 60)).padStart(2, "0")} minutes ${String(seconds % 60).padStart(2, "0")} seconds`} cancelformSubmit={cancelformSubmit} />}
       {isVisible ? <div className="fixed top-[120px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 border rounded shadow-md">{confirmationText}</div> : null}
     </>
   );
