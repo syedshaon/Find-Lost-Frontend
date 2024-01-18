@@ -15,9 +15,9 @@ const Popup = ({ positionPop, selectedLetters, isOpen, closePopup, comparePositi
           className="fixed z-50"
           style={
             positionPop.x / screenWidth > 0.6
-              ? positionPop.y / screenHeight > 0.7
+              ? positionPop.y / screenHeight > 0.6
                 ? {
-                    top: `${positionPop.y * 0.7}px`,
+                    top: `${positionPop.y * 0.6}px`,
 
                     left: `${positionPop.x * 0.6}px`,
                   }
@@ -26,9 +26,9 @@ const Popup = ({ positionPop, selectedLetters, isOpen, closePopup, comparePositi
 
                     left: `${positionPop.x * 0.6}px`, // Adjust the offset as needed
                   }
-              : positionPop.y / screenHeight > 0.7
+              : positionPop.y / screenHeight > 0.6
               ? {
-                  top: `${positionPop.y * 0.7}px`,
+                  top: `${positionPop.y * 0.6}px`,
                   left: `${positionPop.x + 10}px`, // Adjust the offset as needed
                 }
               : {

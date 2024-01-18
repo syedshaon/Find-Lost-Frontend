@@ -5,6 +5,7 @@ import GameOne from "./pages/GameOne";
 import GameTwo from "./pages/GameTwo";
 import GameThree from "./pages/GameThree";
 import ErrorPage from "./pages/ErrorPage";
+import HighScore from "./pages/HighScore";
 
 // import Team from "./pages/Team";
 // import Login from "./pages/Login";
@@ -25,15 +26,8 @@ const Router = () => {
         <Route path="/game-one" element={<GameOne />} />
         <Route path="/game-two" element={<GameTwo />} />
         <Route path="/game-three" element={<GameThree />} />
-        {/* <Route path="/team" element={<Team />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/update" element={isLoggedIn ? <Update /> : <Home />} /> */}
-        {/* <Route path="/logout" element={<Testimonials />} /> */}
-        {/* <Route path="/new_post" element={isLoggedIn ? <Create_Post /> : <Login />} />
-        <Route path="/post/:postId" element={isLoggedIn ? <Read_Post /> : <Login />} />
-        <Route path="/editpost/:postId" element={isLoggedIn ? <Edit_Post /> : <Login />} />
-        <Route path="/products/:productId" element={<Home />} />*/}
+        <Route path="/high-score" element={<HighScore />} />
+
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>

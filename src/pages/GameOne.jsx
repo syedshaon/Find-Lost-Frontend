@@ -276,7 +276,7 @@ function GameOne() {
         {/* <ImageWithClickCoordinates togglePopup={togglePopup} imgSrc={Abcd} /> */}
       </div>
       <Footer />
-      {showFinishPopup && <FinishPop time={`${String(Math.trunc(seconds / 60)).padStart(2, "0")} minutes ${String(seconds % 60).padStart(2, "0")} seconds`} cancelformSubmit={cancelformSubmit} />}
+      {showFinishPopup && <FinishPop time={seconds} gameName={"Find Lost Letters"} timeSpent={`${String(Math.trunc(seconds / 60)).padStart(2, "0")} minutes ${String(seconds % 60).padStart(2, "0")} seconds`} cancelformSubmit={cancelformSubmit} />}
       {isVisible ? <div className="fixed top-[120px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 border rounded shadow-md">{confirmationText}</div> : null}
     </>
   );

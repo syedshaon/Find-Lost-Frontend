@@ -20,22 +20,24 @@ const PopupTwo = ({ positionPop, isOpen, closePopup, comparePosition }) => {
             positionPop.x / screenWidth > 0.6
               ? positionPop.y / screenHeight > 0.7
                 ? {
-                    top: `${positionPop.y * 0.7}px`,
+                    top: `${positionPop.y * 0.6}px`,
 
-                    left: `${positionPop.x * 0.6}px`,
+                    left: `${positionPop.x * 0.7}px`,
                   }
                 : {
-                    top: `${positionPop.y}px`,
+                    top: `${positionPop.y * 0.6}px`,
 
-                    left: `${positionPop.x * 0.6}px`, // Adjust the offset as needed
+                    left: `${positionPop.x * 0.7}px`, // Adjust the offset as needed
                   }
               : positionPop.y / screenHeight > 0.7
               ? {
-                  top: `${positionPop.y * 0.7}px`,
+                  top: `${positionPop.y * 0.6}px`,
+
                   left: `${positionPop.x + 10}px`, // Adjust the offset as needed
                 }
               : {
-                  top: `${positionPop.y}px`,
+                  top: `${positionPop.y * 0.6}px`,
+
                   left: `${positionPop.x + 10}px`, // Adjust the offset as needed
                 }
           }
