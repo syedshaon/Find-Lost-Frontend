@@ -6,6 +6,7 @@ import Footer from "./Footer";
 import Waldo from "../assets/waldo.jpg";
 import PopupTwo from "./PopupTwo";
 import FinishPop from "./FinishPop";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 function GameThree() {
   const navigate = useNavigate();
@@ -17,6 +18,39 @@ function GameThree() {
   const [seconds, setSeconds] = useState(0);
   const [isRunning, setIsRunning] = useState(true);
   const [showFinishPopup, setShowFinishPopup] = useState(false);
+
+  // Related to game start and ending  // Starts here
+  const [gameData, setGameData] = useState([]);
+
+  useEffect(() => {
+    const fetchgameData = async () => {
+      try {
+        const response = await fetch(apiUrl + "/game-start", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            gameName: "Find Lost Characters",
+          }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          // console.log(data._id);
+          setGameData(data);
+        } else {
+          console.error("Failed to retrieve scores");
+        }
+      } catch (error) {
+        console.error("Error during fetch:", error);
+      }
+    };
+
+    fetchgameData();
+  }, []);
+
+  // Related to game start and ending // Ends here
 
   const selectedLetters = ["Professor", "Police", "Sign"];
 
@@ -144,7 +178,7 @@ function GameThree() {
         />
       </div>
       <Footer />
-      {showFinishPopup && <FinishPop time={seconds} gameName={"Find Lost Characters"} timeSpent={`${String(Math.trunc(seconds / 60)).padStart(2, "0")} minutes ${String(seconds % 60).padStart(2, "0")} seconds`} cancelformSubmit={cancelformSubmit} />}
+      {showFinishPopup && <FinishPop time={seconds} gameId={gameData._id} timeSpent={`${String(Math.trunc(seconds / 60)).padStart(2, "0")} minutes ${String(seconds % 60).padStart(2, "0")} seconds`} cancelformSubmit={cancelformSubmit} />}
 
       {isVisible ? <div className="fixed top-[120px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 border rounded shadow-md">{confirmationText}</div> : null}
     </>

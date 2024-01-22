@@ -15,6 +15,40 @@ function GameOne() {
   const [isVisible, setIsVisible] = useState(false);
   const [isRunning, setIsRunning] = useState(true);
   const [showFinishPopup, setShowFinishPopup] = useState(false);
+  const apiUrl = import.meta.env.VITE_API_URL;
+  // Related to game start and ending  // Starts here
+  const [gameData, setGameData] = useState([]);
+
+  useEffect(() => {
+    const fetchgameData = async () => {
+      try {
+        const response = await fetch(apiUrl + "/game-start", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            gameName: "Find Lost Letters",
+          }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          // console.log(data._id);
+          setGameData(data);
+        } else {
+          console.error("Failed to retrieve scores");
+        }
+      } catch (error) {
+        console.error("Error during fetch:", error);
+      }
+    };
+
+    fetchgameData();
+  }, []);
+
+  // Related to game start and ending // Ends here
+
   // const togglePopup = (event) => {
   //   setPosition({ x: event.clientX, y: event.clientY });
   //   setIsOpen(!isOpen);
@@ -276,7 +310,7 @@ function GameOne() {
         {/* <ImageWithClickCoordinates togglePopup={togglePopup} imgSrc={Abcd} /> */}
       </div>
       <Footer />
-      {showFinishPopup && <FinishPop time={seconds} gameName={"Find Lost Letters"} timeSpent={`${String(Math.trunc(seconds / 60)).padStart(2, "0")} minutes ${String(seconds % 60).padStart(2, "0")} seconds`} cancelformSubmit={cancelformSubmit} />}
+      {showFinishPopup && <FinishPop time={seconds} gameId={gameData._id} timeSpent={`${String(Math.trunc(seconds / 60)).padStart(2, "0")} minutes ${String(seconds % 60).padStart(2, "0")} seconds`} cancelformSubmit={cancelformSubmit} />}
       {isVisible ? <div className="fixed top-[120px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 border rounded shadow-md">{confirmationText}</div> : null}
     </>
   );

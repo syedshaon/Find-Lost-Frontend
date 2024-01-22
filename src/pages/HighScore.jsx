@@ -15,7 +15,7 @@ function HighScore() {
   useEffect(() => {
     const fetchScores = async () => {
       try {
-        const response = await fetch(apiUrl);
+        const response = await fetch(apiUrl + "/scores");
 
         if (response.ok) {
           const data = await response.json();
@@ -36,8 +36,8 @@ function HighScore() {
     .filter((score) => score.gameName === "Find Lost Letters")
     .sort((a, b) => {
       // Convert time to numeric value for comparison
-      const timeA = parseInt(a.time, 10);
-      const timeB = parseInt(b.time, 10);
+      const timeA = parseInt(a.endTime, 10);
+      const timeB = parseInt(b.endTime, 10);
 
       return timeA - timeB;
     });
@@ -47,8 +47,8 @@ function HighScore() {
     .filter((score) => score.gameName === "Find Lost Animals")
     .sort((a, b) => {
       // Convert time to numeric value for comparison
-      const timeA = parseInt(a.time, 10);
-      const timeB = parseInt(b.time, 10);
+      const timeA = parseInt(a.endTime, 10);
+      const timeB = parseInt(b.endTime, 10);
 
       return timeA - timeB;
     });
@@ -58,8 +58,8 @@ function HighScore() {
     .filter((score) => score.gameName === "Find Lost Characters")
     .sort((a, b) => {
       // Convert time to numeric value for comparison
-      const timeA = parseInt(a.time, 10);
-      const timeB = parseInt(b.time, 10);
+      const timeA = parseInt(a.endTime, 10);
+      const timeB = parseInt(b.endTime, 10);
 
       return timeA - timeB;
     });
@@ -79,14 +79,16 @@ function HighScore() {
                   <thead>
                     <tr className="bg-gray-100">
                       <th className="py-2 px-4 border-r">Player</th>
-                      <th className="py-2 px-4">Time</th>
+                      <th className="py-2 px-4 border-r">Time</th>
+                      <th className="py-2 px-4">Date</th>
                     </tr>
                   </thead>
                   <tbody>
                     {CharacterScores.map((score) => (
                       <tr key={score._id}>
-                        <td className="py-2 px-4 border-r text-center">{score.playerName}</td>
-                        <td className="py-2 px-4  text-center">{score.time} seconds</td>
+                        <td className="py-2 px-4 border-r text-center text-sm ">{score.playerName}</td>
+                        <td className="py-2 px-4  border-r text-center text-sm ">{(new Date(score.endTime) - new Date(score.startTime)) / 1000} sec</td>
+                        <td className="py-2 px-4  text-center text-sm ">{score.endTime} </td>
                       </tr>
                     ))}
                   </tbody>
@@ -102,14 +104,16 @@ function HighScore() {
                   <thead>
                     <tr className="bg-gray-100">
                       <th className="py-2 px-4 border-r">Player</th>
-                      <th className="py-2 px-4">Time</th>
+                      <th className="py-2 px-4 border-r">Time</th>
+                      <th className="py-2 px-4">Date</th>
                     </tr>
                   </thead>
                   <tbody>
                     {LettersScores.map((score) => (
                       <tr key={score._id}>
-                        <td className="py-2 px-4 border-r text-center">{score.playerName}</td>
-                        <td className="py-2 px-4  text-center">{score.time} seconds</td>
+                        <td className="py-2 px-4 border-r text-center text-sm ">{score.playerName}</td>
+                        <td className="py-2 px-4  border-r text-center text-sm ">{(new Date(score.endTime) - new Date(score.startTime)) / 1000} sec</td>
+                        <td className="py-2 px-4  text-center text-sm ">{score.endTime} </td>
                       </tr>
                     ))}
                   </tbody>
@@ -125,14 +129,16 @@ function HighScore() {
                   <thead>
                     <tr className="bg-gray-100">
                       <th className="py-2 px-4 border-r">Player</th>
-                      <th className="py-2 px-4">Time</th>
+                      <th className="py-2 px-4 border-r">Time</th>
+                      <th className="py-2 px-4">Date</th>
                     </tr>
                   </thead>
                   <tbody>
                     {AnimalScores.map((score) => (
                       <tr key={score._id}>
-                        <td className="py-2 px-4 border-r text-center">{score.playerName}</td>
-                        <td className="py-2 px-4  text-center">{score.time} seconds</td>
+                        <td className="py-2 px-4 border-r text-center text-sm ">{score.playerName}</td>
+                        <td className="py-2 px-4  border-r text-center text-sm ">{(new Date(score.endTime) - new Date(score.startTime)) / 1000} sec</td>
+                        <td className="py-2 px-4  text-center text-sm ">{score.endTime} </td>
                       </tr>
                     ))}
                   </tbody>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function FinishPop({ timeSpent, cancelformSubmit, gameName, time }) {
+function FinishPop({ timeSpent, cancelformSubmit, gameName, time, gameId }) {
   const [submitStatusVisible, setSubmitStatusVisible] = useState(false);
   const [responseText, setResponseText] = useState("");
   const navigate = useNavigate();
@@ -10,22 +10,21 @@ function FinishPop({ timeSpent, cancelformSubmit, gameName, time }) {
 
   const submitForm = async (e) => {
     e.preventDefault();
-    console.log("trying 1");
+    // console.log("trying 1");
     try {
-      console.log("trying 2");
-      const response = await fetch(apiUrl, {
-        method: "POST",
+      // console.log("trying 2");
+      const response = await fetch(apiUrl + "/score-update", {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           playerName,
-          gameName,
-          time,
+          gameId,
         }),
       });
 
-      console.log(response);
+      // console.log(response);
 
       if (response.ok) {
         setResponseText("Score inserted successfully!");
