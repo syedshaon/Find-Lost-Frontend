@@ -3,9 +3,6 @@ import React, { useState } from "react";
 import { FiMenu } from "react-icons/fi";
 import { IoHomeOutline } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
-import Professor from "../assets/prefessor.jpg";
-import Police from "../assets/police.jpg";
-import Sign from "../assets/sign.jpg";
 
 const Button = ({ text, color, hoverBG }) => {
   return <button className={`h-11 p-2.5 border cursor-pointer transition duration-200   ease ${hoverBG === "emerald" ? "hover:text-white border hover:border-white hover:bg-blue-500" : "hover:text-blue-500 hover:bg-white hover:border hover:border-blue-500"}   ${color === "emerald" ? "text-white bg-blue-500" : "text-black border border-blue-500"} rounded-10px rounded min-w-[93px]  mx-2 text-base font-medium `}>{text}</button>;
@@ -32,22 +29,17 @@ const NavbarThree = ({ timer, BoardItems }) => {
         </NavLink>
 
         <nav className="flex flex-wrap justify-center    items-center space-x-30">
-          <div className="h-[80px]   min-w-[24px] p-2.5 border transition duration-200 ease bg-blue-400 text-white mx-2 flex gap-2 justify-center items-center">
-            <span className={`p-1 rounded-full h-5 w-5 flex justify-center items-center ${BoardItems.Professor.isDone ? "  bg-green-500  " : "  bg-red-500"}`}>{BoardItems.Professor.isDone ? "✓" : "x"}</span>
-
-            <img className="h-[70px]" src={Professor} alt="character" />
-          </div>
-          <div className="h-[80px]   min-w-[24px] p-2.5 border transition duration-200 ease bg-blue-400 text-white mx-2 flex gap-2 justify-center items-center">
-            <span className={`p-1 rounded-full h-5 w-5 flex justify-center items-center ${BoardItems.Police.isDone ? "  bg-green-500  " : "  bg-red-500"}`}>{BoardItems.Police.isDone ? "✓" : "x"}</span>
-
-            <img className="h-[70px]" src={Police} alt="character" />
-          </div>
-          <div className="h-[80px]   min-w-[24px] p-2.5 border transition duration-200 ease bg-blue-400 text-white mx-2 flex gap-2 justify-center items-center">
-            <span className={`p-1 rounded-full h-5 w-5 flex justify-center items-center ${BoardItems.Sign.isDone ? "  bg-green-500  " : "  bg-red-500"}`}>{BoardItems.Sign.isDone ? "✓" : "x"}</span>
-
-            <img className="h-[70px]" src={Sign} alt="character" />
-          </div>
-
+          {Object.keys(BoardItems).map((key) => {
+            // const value = BoardItems[key];
+            return (
+              // <Button key={key} text={BoardItems[key].isDone ? `✓ ${BoardItems[key].value}` : `X ${BoardItems[key].value}`} />
+              <div key={key} className="h-[80px]   min-w-[24px] p-2.5 border transition duration-200 ease bg-blue-400 text-white mx-2 flex gap-2 justify-center items-center">
+                <span className={`p-1 rounded-full h-5 w-5 flex justify-center items-center ${BoardItems[key].isDone ? "  bg-green-500  " : "  bg-red-500"}`}>{BoardItems[key].isDone ? "✓" : "x"}</span>
+                {/* <span className="text-xl">{BoardItems[key].value}</span> */}
+                <img className="h-[70px]" src={`/${BoardItems[key].value}.jpg`} alt={BoardItems[key].value} />
+              </div>
+            );
+          })}
           <Button text={timer} color="emerald" />
           <NavLink to="/high-score">
             <Button text="High Scores" color="emerald" />

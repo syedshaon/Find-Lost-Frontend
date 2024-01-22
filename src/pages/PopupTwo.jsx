@@ -1,10 +1,7 @@
 // Popup.jsx
 import React, { useState } from "react";
-import Professor from "../assets/prefessor.jpg";
-import Police from "../assets/police.jpg";
-import Sign from "../assets/sign.jpg";
 
-const PopupTwo = ({ positionPop, isOpen, closePopup, comparePosition }) => {
+const PopupTwo = ({ positionPop, selectedLetters, isOpen, closePopup, comparePosition }) => {
   const screenWidth = window.innerWidth;
   const screenHeight = window.innerHeight;
 
@@ -49,33 +46,21 @@ const PopupTwo = ({ positionPop, isOpen, closePopup, comparePosition }) => {
               </button>
             </div>
             <div className="flex flex-col items-stretch justify-stretch">
-              <div
-                onClick={() => {
-                  comparePosition(`Professor`);
-                  closePopup();
-                }}
-                className="cursor-pointer  min-w-[70px]  text-5xl   border border-gray-400 hover:border-red-600 hover:bg-yellow-400 text-center   p-2 pt-0   "
-              >
-                <img src={Professor} alt="Professor" />
-              </div>
-              <div
-                onClick={() => {
-                  comparePosition(`Police`);
-                  closePopup();
-                }}
-                className="cursor-pointer  min-w-[70px]  text-5xl   border border-gray-400 hover:border-red-600 hover:bg-yellow-400 text-center   p-2 pt-0   "
-              >
-                <img src={Police} alt="Police" />
-              </div>
-              <div
-                onClick={() => {
-                  comparePosition(`Sign`);
-                  closePopup();
-                }}
-                className="cursor-pointer  min-w-[70px]  text-5xl   border border-gray-400 hover:border-red-600 hover:bg-yellow-400 text-center   p-2 pt-0   "
-              >
-                <img src={Sign} alt="Sign" />
-              </div>
+              {selectedLetters.map((letter, index) => {
+                return (
+                  <div
+                    onClick={() => {
+                      comparePosition(`${letter}`);
+                      closePopup();
+                    }}
+                    key={index}
+                    className="cursor-pointer  min-w-[70px]  text-5xl   border border-gray-400 hover:border-red-600 hover:bg-yellow-400 text-center   p-2 pt-0   "
+                  >
+                    {/* {letter} */}
+                    <img src={`/${letter}.jpg`} alt={letter} />
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

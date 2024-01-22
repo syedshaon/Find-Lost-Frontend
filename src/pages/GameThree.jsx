@@ -53,27 +53,41 @@ function GameThree() {
 
   // Related to game start and ending // Ends here
 
-  const selectedLetters = ["Professor", "Police", "Sign"];
+  const uLetters = ["professor", "police", "sign", "thirtyfive", "oneeye", "rumpets"];
 
-  const [BoardItems, setBoardItems] = useState({
-    Professor: {
-      isDone: false,
-      value: "Professor",
-    },
-    Police: {
-      isDone: false,
-      value: "Police",
-    },
-    Sign: {
-      isDone: false,
-      value: "Sign",
-    },
-  });
+  const [selectedLetters, setSelectedLetters] = useState([]);
+  const [BoardItems, setBoardItems] = useState({});
+
+  useEffect(() => {
+    let shuffledArray = uLetters.slice(); // Create a copy of the array
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+    }
+
+    setSelectedLetters(shuffledArray.slice(0, 3));
+  }, []);
+
+  useEffect(() => {
+    const newItems = selectedLetters.reduce((acc, letter) => {
+      acc[letter] = {
+        isDone: false,
+        value: letter,
+      };
+      return acc;
+    }, {});
+
+    // console.log(newItems);
+    setBoardItems({ ...newItems });
+  }, [selectedLetters]);
 
   const AlphabetPostion = {
-    Professor: [600, 705, 1840, 1980],
-    Police: [1900, 1940, 1050, 1150],
-    Sign: [0, 50, 2800, 2880],
+    professor: [600, 705, 1840, 1980],
+    police: [1890, 1940, 1050, 1150],
+    sign: [0, 50, 2800, 2880],
+    thirtyfive: [1030, 1110, 1485, 1595],
+    oneeye: [1220, 1310, 1355, 1425],
+    rumpets: [1720, 1815, 825, 970],
   };
 
   const cancelformSubmit = () => {
@@ -90,17 +104,12 @@ function GameThree() {
     const x = event.nativeEvent.offsetX;
     const y = event.nativeEvent.offsetY;
 
-    // console.log(`Mouse clicked at coordinates: (${x}, ${y})`);
+    console.log(`Mouse clicked at coordinates: (${x}, ${y})`);
   };
 
   const comparePosition = (letter) => {
     let X1, Y1, X2, Y2;
-    // if (window.innerWidth >= 2100) {
-    //   X1 = AlphabetPostion[letter][0];
-    //   X2 = AlphabetPostion[letter][1];
-    //   Y1 = AlphabetPostion[letter][2];
-    //   Y2 = AlphabetPostion[letter][3];
-    // } else {
+
     X1 = AlphabetPostion[letter][0] * (window.innerWidth / 2000);
     X2 = AlphabetPostion[letter][1] * (window.innerWidth / 2000);
     Y1 = AlphabetPostion[letter][2] * (window.innerWidth / 2000);
@@ -116,11 +125,6 @@ function GameThree() {
         setIsVisible(false);
       }, 2000);
       // console.log(position.x, X1, X2, position.y, Y1, Y2);
-      // if (1 == 1) {
-      //   setIsRunning(false);
-      //   setShowFinishPopup(true);
-      //   console.log(BoardItems);
-      // }
     } else {
       setIsVisible(true);
       setConfirmationText("Oops! Please Try Again...");
@@ -134,12 +138,13 @@ function GameThree() {
   // Check if all finding is done
 
   useEffect(() => {
-    if (BoardItems.Professor.isDone === true && BoardItems.Police.isDone === true && BoardItems.Sign.isDone === true) {
-      UpdateScore(gameData._id);
-      setIsRunning(false);
-      setShowFinishPopup(true);
-
-      // console.log(BoardItems);
+    if (Object.keys(BoardItems).length > 2) {
+      if (Object.values(BoardItems).every((item) => item.isDone === true)) {
+        UpdateScore(gameData._id);
+        setIsRunning(false);
+        setShowFinishPopup(true);
+        // console.log(BoardItems);
+      }
     }
   }, [BoardItems]);
 
@@ -168,7 +173,7 @@ function GameThree() {
     <>
       <NavbarThree timer={`${String(Math.trunc(seconds / 60)).padStart(2, "0")}:${String(seconds % 60).padStart(2, "0")}`} BoardItems={BoardItems} />
       <div className="bg-blue-300 relative mt-[84px]  py-[10px]   min-h-[100vh]">
-        <PopupTwo comparePosition={comparePosition} isOpen={isOpen} closePopup={closePopup} positionPop={positionPop} />
+        <PopupTwo comparePosition={comparePosition} isOpen={isOpen} closePopup={closePopup} positionPop={positionPop} selectedLetters={selectedLetters} />
         {/* <img onClick={togglePopup} src={Abcd} alt="Abcd" className="w-full   object-cover rounded-md mb-4" /> */}
 
         <img
