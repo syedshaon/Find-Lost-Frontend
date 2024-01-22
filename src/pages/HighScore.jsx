@@ -87,7 +87,7 @@ function HighScore() {
                     {CharacterScores.map((score) => (
                       <tr key={score._id}>
                         <td className="py-2 px-4 border-r text-center text-sm ">{score.playerName}</td>
-                        <td className="py-2 px-4  border-r text-center text-sm ">{(new Date(score.endTime) - new Date(score.startTime)) / 1000} sec</td>
+                        {score.endTime && <td className="py-2 px-4  border-r text-center text-sm ">{(new Date(score.endTime) - new Date(score.startTime)) / 1000} sec</td>}
                         <td className="py-2 px-4  text-center text-sm ">{score.endTime} </td>
                       </tr>
                     ))}
@@ -112,7 +112,7 @@ function HighScore() {
                     {LettersScores.map((score) => (
                       <tr key={score._id}>
                         <td className="py-2 px-4 border-r text-center text-sm ">{score.playerName}</td>
-                        <td className="py-2 px-4  border-r text-center text-sm ">{(new Date(score.endTime) - new Date(score.startTime)) / 1000} sec</td>
+                        {score.endTime && <td className="py-2 px-4  border-r text-center text-sm ">{(new Date(score.endTime) - new Date(score.startTime)) / 1000} sec</td>}
                         <td className="py-2 px-4  text-center text-sm ">{score.endTime} </td>
                       </tr>
                     ))}
@@ -137,7 +137,7 @@ function HighScore() {
                     {AnimalScores.map((score) => (
                       <tr key={score._id}>
                         <td className="py-2 px-4 border-r text-center text-sm ">{score.playerName}</td>
-                        <td className="py-2 px-4  border-r text-center text-sm ">{(new Date(score.endTime) - new Date(score.startTime)) / 1000} sec</td>
+                        {score.endTime && <td className="py-2 px-4  border-r text-center text-sm ">{(new Date(score.endTime) - new Date(score.startTime)) / 1000} sec</td>}
                         <td className="py-2 px-4  text-center text-sm ">{score.endTime} </td>
                       </tr>
                     ))}
