@@ -7,6 +7,7 @@ import Waldo from "../assets/waldo.jpg";
 import PopupTwo from "./PopupTwo";
 import FinishPop from "./FinishPop";
 const apiUrl = import.meta.env.VITE_API_URL;
+import UpdateScore from "./UpdateScore";
 
 function GameThree() {
   const navigate = useNavigate();
@@ -134,8 +135,10 @@ function GameThree() {
 
   useEffect(() => {
     if (BoardItems.Professor.isDone === true && BoardItems.Police.isDone === true && BoardItems.Sign.isDone === true) {
+      UpdateScore(gameData._id);
       setIsRunning(false);
       setShowFinishPopup(true);
+
       // console.log(BoardItems);
     }
   }, [BoardItems]);

@@ -5,6 +5,8 @@ import Footer from "./Footer";
 import Abcd from "../assets/ABCD.jpg";
 import Popup from "./Popup";
 import FinishPop from "./FinishPop";
+const apiUrl = import.meta.env.VITE_API_URL;
+import UpdateScore from "./UpdateScore";
 
 function GameOne() {
   const navigate = useNavigate();
@@ -15,7 +17,7 @@ function GameOne() {
   const [isVisible, setIsVisible] = useState(false);
   const [isRunning, setIsRunning] = useState(true);
   const [showFinishPopup, setShowFinishPopup] = useState(false);
-  const apiUrl = import.meta.env.VITE_API_URL;
+
   // Related to game start and ending  // Starts here
   const [gameData, setGameData] = useState([]);
 
@@ -255,6 +257,7 @@ function GameOne() {
   useEffect(() => {
     if (Object.keys(BoardItems).length > 2) {
       if (Object.values(BoardItems).every((item) => item.isDone === true)) {
+        UpdateScore(gameData._id);
         setIsRunning(false);
         setShowFinishPopup(true);
         // console.log(BoardItems);
