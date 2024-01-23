@@ -19,6 +19,7 @@ function HighScore() {
 
         if (response.ok) {
           const data = await response.json();
+          console.log(data);
           setScores(data);
         } else {
           console.error("Failed to retrieve scores");
@@ -36,8 +37,8 @@ function HighScore() {
     .filter((score) => score.gameName === "Find Lost Letters")
     .sort((a, b) => {
       // Convert time to numeric value for comparison
-      const timeA = parseInt(a.endTime, 10);
-      const timeB = parseInt(b.endTime, 10);
+      const timeA = parseInt(new Date(a.endTime) - new Date(a.startTime), 10);
+      const timeB = parseInt(new Date(b.endTime) - new Date(b.startTime), 10);
 
       return timeA - timeB;
     });
@@ -47,8 +48,8 @@ function HighScore() {
     .filter((score) => score.gameName === "Find Lost Animals")
     .sort((a, b) => {
       // Convert time to numeric value for comparison
-      const timeA = parseInt(a.endTime, 10);
-      const timeB = parseInt(b.endTime, 10);
+      const timeA = parseInt(new Date(a.endTime) - new Date(a.startTime), 10);
+      const timeB = parseInt(new Date(b.endTime) - new Date(b.startTime), 10);
 
       return timeA - timeB;
     });
@@ -58,8 +59,8 @@ function HighScore() {
     .filter((score) => score.gameName === "Find Lost Characters")
     .sort((a, b) => {
       // Convert time to numeric value for comparison
-      const timeA = parseInt(a.endTime, 10);
-      const timeB = parseInt(b.endTime, 10);
+      const timeA = parseInt(new Date(a.endTime) - new Date(a.startTime), 10);
+      const timeB = parseInt(new Date(b.endTime) - new Date(b.startTime), 10);
 
       return timeA - timeB;
     });
